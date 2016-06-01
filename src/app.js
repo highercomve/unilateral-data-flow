@@ -1,11 +1,11 @@
-import StateManager from './store'
+import StateManager from './state_manager'
 import taskReducer from './task_reducer'
 
 let combinedReducer = StateManager.combineReducers({
   tareas: taskReducer
 })
 let store = StateManager.storeFactory(combinedReducer)
-let app = document.getElementById('root')
+let app = document.getElementById('todo-list')
 let formTarea = document.getElementById('tarea')
 let counterDom = document.getElementById('counter')
 
@@ -17,15 +17,29 @@ formTarea.addEventListener('submit', (event) => {
       text: event.target[0].value
     }
   })
+  event.target[0].value = ''
 })
 
 app.addEventListener('click', (event) => {
-  event.preventDefault()
-  store.dispatch({
-    type: 'TASK_REMOVE',
-    payload: event.target.id
-  })
+  if (event.target && event.target.className == "content") {
+    event.preventDefault()
+    store.dispatch({
+      type: 'TASK_TOGGLE',
+      payload: event.target.parentElement.id
+    })
+  }
 })
+
+app.addEventListener('click', (event) => {
+  if (event.target && event.target.className == "todo-remove") {
+    event.preventDefault()
+    store.dispatch({
+      type: 'TASK_REMOVE',
+      payload: event.target.parentElement.id
+    })
+  }
+})
+
 
 store.listen(function () {
   let state = store.getState()
@@ -48,7 +62,14 @@ function listaDeTareas (tareas) {
   return tareas.reduce((htmlAcumulado, tarea, tareas) => {
     return `
       ${htmlAcumulado}
-      <li id="${tarea.id}">${tarea.text}</li>
+      <li id="${tarea.id}" class="${(tarea.done) ? 'ready':'not-ready'}">
+        <span class="content">
+          ${tarea.text}
+        </span>
+        <button class="todo-remove">
+          \u2612
+        </button>
+      </li>
     `
   }, '')
 } 
@@ -61,5 +82,3 @@ function renderCounter (count, domElement) {
   `
 }
 
-console.log('formTarea')
-console.log(app)
