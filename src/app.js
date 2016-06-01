@@ -41,12 +41,12 @@ app.addEventListener('click', (event) => {
 })
 
 
-store.listen(function () {
+store.subscribe(function () {
   let state = store.getState()
   renderTareas(state.tareas, app)
 })
 
-store.listen(function () {
+store.subscribe(function () {
   renderCounter(store.getState().tareas.length, counterDom)
 })
 

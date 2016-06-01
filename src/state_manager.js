@@ -54,7 +54,7 @@ function storeFactory (reducer) {
     })
   }
 
-  function listen (callback) {
+  function subscribe (callback) {
     listeners.push(callback)
     return () => {
       listeners = listeners.filter((listeners) => {
