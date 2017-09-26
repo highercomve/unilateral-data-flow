@@ -70,7 +70,7 @@ function storeFactory (reducer) {
   return {
     dispatch,
     getState,
-    listen
+    subscribe
   }
 }
 
