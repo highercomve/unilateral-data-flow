@@ -48,6 +48,7 @@
     "expect": "^1.14.0",
     "immutable": "^3.7.6",
     "react-dom": "^0.14.7",
+    "uglify-js": "^3.1.2",
     "uglifyjs": "^2.4.10",
     "uuid": "^2.0.2"
   }
