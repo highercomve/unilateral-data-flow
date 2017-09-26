@@ -30,6 +30,7 @@ function toggleStatus (task) {
 }
 
 function taskReducer (action, state = []) {
+  action = (!action) ? {type: null} : action
   switch (action.type) {
     case 'TASK_ADD':
       return addTask(state, action.payload)

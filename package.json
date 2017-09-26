@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "watch": "watchify src/app.js -d -o app/js/app.js -v",
+    "watch:test": "watchify test/index.js -d -o app/js/test.js -v",
     "build": "browserify src/app.js -d -v | uglifyjs -c > app/js/app.js",
+    "build:test": "browserify test/index.js -d -v | uglifyjs -c > app/js/test.js",
     "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -35,11 +37,9 @@
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "express": "^4.13.4",
-    "gzippo": "^0.2.0",
+    "express-static-gzip": "^0.3.0",
     "morgan": "^1.7.0",
     "nodemon": "^1.9.1",
-    "react": "^0.14.7",
-    "redux": "^3.3.1",
     "watchify": "^3.7.0"
   },
   "devDependencies": {

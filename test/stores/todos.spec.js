@@ -1,18 +1,19 @@
 import expect from 'expect'
-import Todos from '../../src/components/todos/store'
+import Todos from '../../src/task_reducer'
 
 function initialState () {
   console.log('Initial state must be []')
   expect(
-    Todos(undefined, {})
+    Todos(undefined, [])
   ).toEqual([])
 }
 
 function ifAddTodo() {
   console.log('With one todo must be [TODO{}]')
-  expect(
-    Todos([], { type: "ADD_TODO", text: "nueva todo"})
-  ).toEqual([{id: 0, text: "nueva todo", completed: false}])
+  const text = "nueva todo"
+  const state = Todos({ type: "TASK_ADD", payload: {text: text}}, [])
+  expect(state[0].text).toEqual(text)
+  expect(state[0].done).toEqual(false)
 }
 
 initialState()
